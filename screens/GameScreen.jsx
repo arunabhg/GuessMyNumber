@@ -5,6 +5,8 @@ import Title from "../components/ui/Title";
 
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 function GameScreen({ userNumber, onGameOver }) {
 	// Declare the min and max number of guesses
@@ -63,17 +65,23 @@ function GameScreen({ userNumber, onGameOver }) {
 		<View style={styles.mainScreen}>
 			<Title>Opponent's Guess</Title>
 			<NumberContainer>{currentGuess}</NumberContainer>
-			<View>
-				<Text>Higher or Lower?</Text>
-				<View>
-					<PrimaryButton onPressed={nextGuessHandler.bind(this, "lower")}>
-						-
-					</PrimaryButton>
-					<PrimaryButton onPressed={nextGuessHandler.bind(this, "greater")}>
-						+
-					</PrimaryButton>
+			<Card>
+				<InstructionText style={styles.instructionText}>
+					Higher or Lower?
+				</InstructionText>
+				<View style={styles.buttonsContainer}>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPressed={nextGuessHandler.bind(this, "lower")}>
+							-
+						</PrimaryButton>
+					</View>
+					<View style={styles.buttonContainer}>
+						<PrimaryButton onPressed={nextGuessHandler.bind(this, "greater")}>
+							+
+						</PrimaryButton>
+					</View>
 				</View>
-			</View>
+			</Card>
 			<View>{/* LOG ROUNDS */}</View>
 		</View>
 	);
@@ -85,5 +93,14 @@ const styles = StyleSheet.create({
 	mainScreen: {
 		flex: 1,
 		padding: 32
+	},
+	instructionText: {
+		marginBottom: 12
+	},
+	buttonsContainer: {
+		flexDirection: "row"
+	},
+	buttonContainer: {
+		flex: 1
 	}
 });
